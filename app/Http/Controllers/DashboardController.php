@@ -13,9 +13,10 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
-        $queryOvertime = Overtime::select('overtimes.*', 'users.name AS user_name', 'users.position')
+        $queryOvertime = Overtime::select('overtimes.*', 'users.name AS user_name', 'users.position', 'pm.name AS pm_name')
             ->when($user->role == 'employee', function($q) use($user) {
                 $q->join('users', 'users.id', 'overtimes.employee_id')
+                    ->leftJoin('users as pm', 'pm.id', '=', 'overtimes.product_manager_id')
                     ->where('overtimes.employee_id', $user->id);
             })
             ->when($user->role == 'product_manager', function($q) use($user) {
