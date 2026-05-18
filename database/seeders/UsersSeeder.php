@@ -18,21 +18,25 @@ class UsersSeeder extends Seeder
             'email' => 'afgan@gmail.com',
             'password' => bcrypt('123456'),
             'role' => 'employee',
-            'position' => 'Frontend Developer'
+            'position' => 'Frontend Developer',
+            'profile' => 'Default'
         ]);
             User::create([
             'name' => 'Altaf',
             'email' => 'altaf@lenna.ai',
             'password' => bcrypt('123456'),
             'role' => 'employee',
-            'position' => 'Backend Developer'
+            'position' => 'Backend Developer',
+            'profile' => 'Default'
+
         ]);
             User::create([
             'name' => 'Katya',
             'email' => 'yaya@lenna.ai',
             'password' => bcrypt('123456'),
             'role' => 'employee',
-            'position' => 'Fullstack Engineer'
+            'position' => 'Fullstack Engineer',
+            'profile' => 'Default'
         ]);
             User::create([
             'name' => 'bang dhika',
