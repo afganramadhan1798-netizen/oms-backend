@@ -42,9 +42,33 @@ class UsersSeeder extends Seeder
         //     'position' => 'Fullstack Engineer',
         //     'profile' => 'Default'
         // ]);
+        //     User::create([
+        //     'name' => 'mba nicaa',
+        //     'email' => 'niss@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'product_manager',
+        //     'position' => 'Product Manager',
+        //     'profile' => 'Default'
+        // ]);
             User::create([
-            'name' => 'mba nicaa',
-            'email' => 'niss@lenna.ai',
+            'name' => 'Mas Fachri',
+            'email' => 'Fachri@lenna.ai',
+            'password' => bcrypt('123456'),
+            'role' => 'product_manager',
+            'position' => 'Product Manager',
+            'profile' => 'Default'
+        ]);
+            User::create([
+            'name' => 'A Fuja',
+            'email' => 'AFuja@lenna.ai',
+            'password' => bcrypt('123456'),
+            'role' => 'product_manager',
+            'position' => 'Product Manager',
+            'profile' => 'Default'
+        ]);
+            User::create([
+            'name' => 'Mas Gilang',
+            'email' => 'Gilang@lenna.ai',
             'password' => bcrypt('123456'),
             'role' => 'product_manager',
             'position' => 'Product Manager',
