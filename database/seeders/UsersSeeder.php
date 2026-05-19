@@ -13,39 +13,39 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-            User::create([
-            'name' => 'Afgan',
-            'email' => 'afgan@gmail.com',
-            'password' => bcrypt('123456'),
-            'role' => 'employee',
-            'position' => 'Frontend Developer',
-            'profile' => 'Default'
-        ]);
-            User::create([
-            'name' => 'Altaf',
-            'email' => 'altaf@lenna.ai',
-            'password' => bcrypt('123456'),
-            'role' => 'employee',
-            'position' => 'Backend Developer',
-            'profile' => 'Default'
+        //     User::create([
+        //     'name' => 'Afgan',
+        //     'email' => 'afgan@gmail.com',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'employee',
+        //     'position' => 'Frontend Developer',
+        //     'profile' => 'Default'
+        // ]);
+        //     User::create([
+        //     'name' => 'Altaf',
+        //     'email' => 'altaf@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'employee',
+        //     'position' => 'Backend Developer',
+        //     'profile' => 'Default'
 
-        ]);
-            User::create([
-            'name' => 'Katya',
-            'email' => 'yaya@lenna.ai',
-            'password' => bcrypt('123456'),
-            'role' => 'employee',
-            'position' => 'Fullstack Engineer',
-            'profile' => 'Default'
-        ]);
-            User::create([
-            'name' => 'bang dhika',
-            'email' => 'dhik@lenna.ai',
-            'password' => bcrypt('123456'),
-            'role' => 'employee',
-            'position' => 'Fullstack Engineer',
-            'profile' => 'Default'
-        ]);
+        // ]);
+        //     User::create([
+        //     'name' => 'Katya',
+        //     'email' => 'yaya@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'employee',
+        //     'position' => 'Fullstack Engineer',
+        //     'profile' => 'Default'
+        // ]);
+        //     User::create([
+        //     'name' => 'bang dhika',
+        //     'email' => 'dhik@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'employee',
+        //     'position' => 'Fullstack Engineer',
+        //     'profile' => 'Default'
+        // ]);
         //     User::create([
         //     'name' => 'mba nicaa',
         //     'email' => 'niss@lenna.ai',
@@ -54,28 +54,36 @@ class UsersSeeder extends Seeder
         //     'position' => 'Product Manager',
         //     'profile' => 'Default'
         // ]);
+        //     User::create([
+        //     'name' => 'Mas Fachri',
+        //     'email' => 'Fachri@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'product_manager',
+        //     'position' => 'Product Manager',
+        //     'profile' => 'Default'
+        // ]);
+        //     User::create([
+        //     'name' => 'A Fuja',
+        //     'email' => 'AFuja@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'product_manager',
+        //     'position' => 'Product Manager',
+        //     'profile' => 'Default'
+        // ]);
+        //     User::create([
+        //     'name' => 'Mas Gilang',
+        //     'email' => 'Gilang@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'product_manager',
+        //     'position' => 'Product Manager',
+        //     'profile' => 'Default'
+        // ]);
             User::create([
-            'name' => 'Mas Fachri',
-            'email' => 'Fachri@lenna.ai',
+            'name' => 'Om Zulham',
+            'email' => 'Zulham@lenna.ai',
             'password' => bcrypt('123456'),
             'role' => 'product_manager',
-            'position' => 'Product Manager',
-            'profile' => 'Default'
-        ]);
-            User::create([
-            'name' => 'A Fuja',
-            'email' => 'AFuja@lenna.ai',
-            'password' => bcrypt('123456'),
-            'role' => 'product_manager',
-            'position' => 'Product Manager',
-            'profile' => 'Default'
-        ]);
-            User::create([
-            'name' => 'Mas Gilang',
-            'email' => 'Gilang@lenna.ai',
-            'password' => bcrypt('123456'),
-            'role' => 'product_manager',
-            'position' => 'Product Manager',
+            'position' => 'Head of Product',
             'profile' => 'Default'
         ]);
     }

@@ -20,15 +20,16 @@ class DashboardController extends Controller
         'pm.name AS pm_name'
     )
     ->join('users', 'users.id', '=', 'overtimes.employee_id')
-    ->leftJoin('users as pm', 'pm.id', '=', 'overtimes.product_manager_id');
+    ->leftJoin('users as pm', 'pm.id', '=', 'overtimes.product_manager_id')
+    ->where('overtimes.employee_id', $user->id);
 
-    if ($user->role == 'employee') {
-        $baseQuery->where('overtimes.employee_id', $user->id);
-    }
+    // if ($user->role == 'employee') {
+    //     $baseQuery->where('overtimes.employee_id', $user->id);
+    // }
 
-    if ($user->role == 'product_manager') {
-        $baseQuery->where('overtimes.product_manager_id', $user->id);
-    }
+    // if ($user->role == 'product_manager') {
+    //     $baseQuery->where('overtimes.product_manager_id', $user->id);
+    // }
 
     $overtime = (clone $baseQuery)->get()->map(function ($item) {
         $overtimeTask = OvertimeTask::select('task_title', 'task_description')

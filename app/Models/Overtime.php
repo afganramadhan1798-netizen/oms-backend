@@ -15,13 +15,13 @@ class Overtime extends Model
         'end_time',
         'product_manager_id',
     ];
-    public function user ()
+    public function employee ()
     {
-        return $this->belongsTo (User::class);
+        return $this->belongsTo (User::class, 'employee_id');
     }
 
     public function tasks ()
     {
-        return $this->belongsToMany (OvertimeTask::class);
+        return $this->hasMany (OvertimeTask::class);
     }
 }
