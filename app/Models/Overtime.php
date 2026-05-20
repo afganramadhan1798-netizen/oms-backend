@@ -14,6 +14,7 @@ class Overtime extends Model
         'start_time',
         'end_time',
         'product_manager_id',
+        'title'
     ];
     public function employee ()
     {
