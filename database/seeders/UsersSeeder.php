@@ -78,12 +78,20 @@ class UsersSeeder extends Seeder
         //     'position' => 'Product Manager',
         //     'profile' => 'Default'
         // ]);
+        //     User::create([
+        //     'name' => 'Om Zulham',
+        //     'email' => 'Zulham@lenna.ai',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'product_manager',
+        //     'position' => 'Head of Product',
+        //     'profile' => 'Default'
+        // ]);
             User::create([
-            'name' => 'Om Zulham',
-            'email' => 'Zulham@lenna.ai',
+            'name' => 'Mba Almas',
+            'email' => 'Almas@lenna.ai',
             'password' => bcrypt('123456'),
-            'role' => 'product_manager',
-            'position' => 'Head of Product',
+            'role' => 'human_resource',
+            'position' => 'Human Resource',
             'profile' => 'Default'
         ]);
     }
