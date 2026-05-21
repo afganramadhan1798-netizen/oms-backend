@@ -20,7 +20,7 @@ class ApprovalController extends Controller
                     'id' => $item->id,
                     'employeeName' => $item->employee->name,
                     'employeePosition' => $item->employee->position,
-                    'title'=>$item->title,
+                    'overtime_title'=>$item->overtime_title,
                     'overtimeDate' => $item->date,
                     'startTime' => $item->start_time,
                     'endTime' => $item->end_time,

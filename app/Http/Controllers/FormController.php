@@ -12,7 +12,7 @@ class FormController extends Controller
     public function submit(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'overtime_title' => 'required|string|max:255',
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
@@ -31,7 +31,7 @@ class FormController extends Controller
         $overtime = Overtime::create([
             'employee_id' => $request->user()->id,
             'product_manager_id' => $request->product_manager_id,
-            'title' => $request->title,
+            'overtime_title' => $request->overtime_title,
             'date' => $request->date,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
