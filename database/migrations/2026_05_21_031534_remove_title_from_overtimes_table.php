@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->string('title')->after('product_manager_id');
+            $table->dropColumn('title');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->dropColumn('title');
+            $table->string('title')->nullable();
         });
     }
 };

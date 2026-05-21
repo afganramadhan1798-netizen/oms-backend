@@ -28,7 +28,6 @@ class FormController extends Controller
         }
 
         $duration = $start->diffInHours($end);
-
         $overtime = Overtime::create([
             'employee_id' => $request->user()->id,
             'product_manager_id' => $request->product_manager_id,

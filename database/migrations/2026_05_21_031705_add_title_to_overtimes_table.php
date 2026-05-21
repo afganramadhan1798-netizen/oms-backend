@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->string('title')->after('product_manager_id');
+        $table->string('title')->after('employee_id');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->dropColumn('title');
+        $table->dropColumn('title');
         });
     }
 };
