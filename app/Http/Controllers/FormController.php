@@ -23,7 +23,7 @@ class FormController extends Controller
         $start = Carbon::parse($request->start_time);
         $end = Carbon::parse($request->end_time);
 
-        if ($end->lessThan($start)) {
+        if ($end->lessThanOrEqualTo($start)) {
             $end->addDay();
         }
 
