@@ -24,7 +24,7 @@ class ApprovalController extends Controller
                     'overtimeDate' => $item->date,
                     'startTime' => $item->start_time,
                     'endTime' => $item->end_time,
-                    'duration' => $item->duration . ' Jam',
+                    'duration' => $item->duration . ' Hours',
                     'status' => ucfirst($item->status),
                     'tasks' => $item->tasks->map(function ($task) {
                         return [
