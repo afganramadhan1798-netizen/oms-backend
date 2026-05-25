@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -41,4 +42,26 @@ class ProfileController extends Controller
         'message' => 'No file uploaded'
     ], 400);
 }
+
+public function deletePhoto()
+{
+    $user = auth()->user();
+
+    if ($user->profile_picture) {
+
+        $path = 'profile_pictures/' . $user->profile_picture;
+
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+
+        $user->profile_picture = null;
+        $user->save();
+    }
+
+    return response()->json([
+        'message' => 'Photo deleted successfully'
+    ]);
+}
+
 }

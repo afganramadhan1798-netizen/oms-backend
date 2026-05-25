@@ -38,15 +38,16 @@ class DashboardController extends Controller
 
         $item->tasks = implode("<br />", $overtimeTask->pluck('task_title')->toArray());
         $item->detail_task = $overtimeTask;
+        $item->status = $this->getFinalStatus($item);
 
         return $item;
     });
 
     $totalHours = (clone $baseQuery)->sum('duration');
     $totalSubmission = (clone $baseQuery)->count();
-    $totalApproved = (clone $baseQuery)->where('status', 'approved')->count();
-    $totalPending = (clone $baseQuery)->where('status', 'pending')->count();
-    $totalDeclined = (clone $baseQuery)->where('status', 'declined')->count();
+    $totalApproved = (clone $baseQuery)->where('overtimes.status', 'approved')->count();
+    $totalPending = (clone $baseQuery)->where('overtimes.status', 'pending')->count();
+    $totalDeclined = (clone $baseQuery)->where('overtimes.status', 'declined')->count();
 
     return response()->json([
         'summary' => [
@@ -58,5 +59,33 @@ class DashboardController extends Controller
         ],
         'overtime' => $overtime
     ]);
+}
+
+private function getFinalStatus($item)
+{
+    // PM belum approve
+    if ($item->status === 'pending') {
+        return 'Pending';
+    }
+
+    // PM approve, HR belum review
+    if (
+        $item->status === 'approved' &&
+        $item->human_resource_status === 'pending'
+    ) {
+        return 'Reviewed';
+    }
+
+    // HR approve
+    if ($item->human_resource_status === 'approved') {
+        return 'Approved';
+    }
+
+    // HR reject
+    if ($item->human_resource_status === 'declined') {
+        return 'Declined';
+    }
+
+    return ucfirst($item->status);
 }
 }

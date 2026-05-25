@@ -17,6 +17,12 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Email atau password salah'
             ], 401);
+
+        // if ($user->status !== 'active') {
+        //     return response()->json([
+        //         'message' => 'Akun anda sudah dinonaktifkan'
+        //     ], 403);
+        // }
         }
 
         $accessToken  = $user->createToken(

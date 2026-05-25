@@ -14,7 +14,11 @@ class Overtime extends Model
         'start_time',
         'end_time',
         'product_manager_id',
-        'overtime_title'
+        'overtime_title',
+        'human_resource_status',
+        'human_resource_id',
+        'human_resource_reviewed_at',
+        'human_resource_notes',
     ];
     public function employee ()
     {

@@ -51,4 +51,54 @@ class FormController extends Controller
             'message' => 'Form submitted successfully'
         ], 201);
     }
+
+public function resubmit(Request $request, $id)
+{
+    $overtime = Overtime::findOrFail($id);
+    //only declined can edits
+    if ($overtime->human_resource_status !== 'declined') {
+
+        return response()->json([
+            'message' => 'This overtime cannot be edited'
+        ], 400);
+    }
+    //validation
+    $request->validate([
+        'overtime_title' => 'required',
+        'date' => 'required',
+        'start_time' => 'required',
+        'end_time' => 'required',
+    ]);
+    //Update Overtime
+    $overtime->update([
+        'overtime_title' => $request->overtime_title,
+        'date' => $request->date,
+        'start_time' => $request->start_time,
+        'end_time' => $request->end_time,
+        //reset flow
+        // kembali ke pending PM
+        'status' => 'pending',
+        // reset HR
+        'human_resource_status' => 'pending',
+        'human_resource_id' => null,
+        'human_resource_reviewed_at' => null,
+        'human_resource_notes' => null,
+    ]);
+    // task update
+    // OPTIONAL
+    // kalau task bisa diedit juga nanti kita handle di sini
+    return response()->json([
+        'message' => 'Overtime resubmitted successfully',
+        'data' => $overtime
+    ]);
+}
+
+public function show($id)
+{
+    $overtime = Overtime::with('tasks')->findOrFail($id);
+
+    return response()->json([
+        'data' => $overtime
+    ]);
+}
 }
