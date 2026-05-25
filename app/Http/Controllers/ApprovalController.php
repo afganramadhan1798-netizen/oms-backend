@@ -12,7 +12,9 @@ class ApprovalController extends Controller
         $user = $request->user();
 
         $approvals = Overtime::with(['employee', 'tasks'])
-            ->where('product_manager_id', $user->id)
+            ->when($user->role != 'human_resource', function($q) {
+              $q->where('product_manager_id', $user->id);
+            })
             ->latest()
             ->get()
             ->map(function ($item) {
