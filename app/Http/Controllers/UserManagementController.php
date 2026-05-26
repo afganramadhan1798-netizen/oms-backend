@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class UserManagement extends Controller
+class UserManagementController extends Controller
 {
     public function index()
     {
@@ -60,17 +60,24 @@ class UserManagement extends Controller
     }
 
     public function deactivate($id)
-    {
-        $user = User::findOrFail($id);
-
-        $user->update([
-            'status' => 'inactive'
-        ]);
+{
+    if (auth()->id() == $id) {
 
         return response()->json([
-            'message' => 'User berhasil dinonaktifkan'
-        ]);
+            'message' => 'Tidak bisa menonaktifkan akun sendiri'
+        ], 403);
     }
+
+    $user = User::findOrFail($id);
+
+    $user->update([
+        'status' => 'inactive'
+    ]);
+
+    return response()->json([
+        'message' => 'User berhasil dinonaktifkan'
+    ]);
+}
 
     public function activate($id)
     {

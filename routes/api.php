@@ -6,7 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserManagement;
+use App\Http\Controllers\UserManagementController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -29,11 +29,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/overtimes/{id}/resubmit', [FormController::class,'resubmit']);
 
     Route::prefix('hr')->group(function () {
-    Route::get('/users', [UserManagement::class, 'index']);
-    Route::post('/users', [UserManagement::class, 'store']);
-    Route::put('/users/{id}', [UserManagement::class, 'update']);
-    Route::patch('/users/{id}/deactivate', [UserManagement::class, 'deactivate']);
-    Route::patch('/users/{id}/activate', [UserManagement::class, 'activate']);
+    Route::get('/users', [UserManagementController::class, 'index']);
+    Route::post('/users', [UserManagementController::class, 'store']);
+    Route::put('/users/{id}', [UserManagementController::class, 'update']);
+    Route::patch('/users/{id}/deactivate', [UserManagementController::class, 'deactivate']);
+    Route::patch('/users/{id}/activate', [UserManagementController::class, 'activate']);
 
     Route::get('/overtimes/{id}', [FormController::class, 'show']);
     });
