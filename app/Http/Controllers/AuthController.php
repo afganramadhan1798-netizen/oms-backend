@@ -8,24 +8,33 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+   public function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        // cek email dan password
+        if (
+            !$user ||
+            !Hash::check($request->password, $user->password)
+        ) {
+
             return response()->json([
                 'success' => false,
                 'message' => 'Email atau password salah'
             ], 401);
+        }
 
+        // cek status akun
         if ($user->status !== 'active') {
+
             return response()->json([
+                'success' => false,
                 'message' => 'Akun anda sudah dinonaktifkan'
             ], 403);
         }
-        }
 
-        $accessToken  = $user->createToken(
+        // buat token
+        $accessToken = $user->createToken(
             'access_token',
             ['*'],
             now()->addMinutes(60 * 24),

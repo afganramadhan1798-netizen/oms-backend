@@ -14,6 +14,7 @@ class UserManagementController extends Controller
             'name',
             'email',
             'role',
+            'position',
             'status'
         )->get();
     }
@@ -24,7 +25,8 @@ class UserManagementController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            'role' => 'required'
+            'role' => 'required',
+            'position' => 'required'
         ]);
 
         $user = User::create([
@@ -32,6 +34,7 @@ class UserManagementController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'role' => $validated['role'],
+            'position' =>$validated['position'],
             'status' => 'active'
         ]);
 
