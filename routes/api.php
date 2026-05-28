@@ -27,14 +27,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/overtimes/{id}/hr-reject', [ApprovalController::class,'hrReject']);
     // edit(resubmit)
     Route::put('/overtimes/{id}/resubmit', [FormController::class,'resubmit']);
-
+    // route/api untuk hr
     Route::prefix('hr')->group(function () {
     Route::get('/users', [UserManagementController::class, 'index']);
     Route::post('/users', [UserManagementController::class, 'store']);
     Route::put('/users/{id}', [UserManagementController::class, 'update']);
     Route::patch('/users/{id}/deactivate', [UserManagementController::class, 'deactivate']);
     Route::patch('/users/{id}/activate', [UserManagementController::class, 'activate']);
-
+    // ambil form ketika/yang ingin edit
     Route::get('/overtimes/{id}', [FormController::class, 'show']);
     });
 });

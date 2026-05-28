@@ -51,7 +51,9 @@ class UserManagementController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required'
+            'role' => 'required',
+            'position' => 'required',
+            'status' => 'required'
         ]);
 
         $user->update($validated);
