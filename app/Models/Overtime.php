@@ -29,4 +29,9 @@ class Overtime extends Model
     {
         return $this->hasMany (OvertimeTask::class);
     }
+
+    public function overtime()
+    {
+        return $this->belongsTo(Overtime::class);
+    }
 }

@@ -10,86 +10,111 @@ use Carbon\Carbon;
 class FormController extends Controller
 {
     public function submit(Request $request)
-    {
-        $request->validate([
-            'overtime_title' => 'required|string|max:255',
-            'date' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'product_manager_id' => 'required',
-            'tasks' => 'required|array'
-        ]);
+{
+    $request->validate([
+        'overtime_title' => 'required|string|max:255',
+        'date' => 'required',
+        'start_time' => 'required',
+        'end_time' => 'required',
+        'product_manager_id' => 'required',
 
-        $start = Carbon::parse($request->start_time);
-        $end = Carbon::parse($request->end_time);
+        'detail_task' => 'required|array|min:1',
+        'detail_task.*.task_title' => 'required',
+        'detail_task.*.task_description' => 'required',
+    ]);
 
-        if ($end->lessThanOrEqualTo($start)) {
-            $end->addDay();
-        }
+    $start = Carbon::parse($request->start_time);
+    $end = Carbon::parse($request->end_time);
 
-        $duration = $start->diffInHours($end);
-        $overtime = Overtime::create([
-            'employee_id' => $request->user()->id,
-            'product_manager_id' => $request->product_manager_id,
-            'overtime_title' => $request->overtime_title,
-            'date' => $request->date,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'duration' => $duration,
-            'status' => 'pending'
-        ]);
-
-        foreach ($request->tasks as $task) {
-            OvertimeTask::create([
-                'overtime_id' => $overtime->id,
-                'task_title' => $task['name'],
-                'task_description' => $task['description']
-            ]);
-        }
-
-        return response()->json([
-            'message' => 'Form submitted successfully'
-        ], 201);
+    if ($end->lessThanOrEqualTo($start)) {
+        $end->addDay();
     }
+
+    $duration = $start->diffInHours($end);
+
+    $overtime = Overtime::create([
+        'employee_id' => $request->user()->id,
+        'product_manager_id' => $request->product_manager_id,
+        'overtime_title' => $request->overtime_title,
+        'date' => $request->date,
+        'start_time' => $request->start_time,
+        'end_time' => $request->end_time,
+        'duration' => $duration,
+        'status' => 'pending'
+    ]);
+
+    foreach ($request->detail_task as $task) {
+        $overtime->tasks()->create([
+            'task_title' => $task['task_title'],
+            'task_description' => $task['task_description'],
+        ]);
+    }
+
+    return response()->json([
+        'message' => 'Form submitted successfully'
+    ], 201);
+}
 
 public function resubmit(Request $request, $id)
 {
     $overtime = Overtime::findOrFail($id);
-    //only declined can edits
-    if ($overtime->human_resource_status !== 'declined') {
 
+    // hanya overtime declined yang bisa diedit
+    if ($overtime->human_resource_status !== 'declined') {
         return response()->json([
             'message' => 'This overtime cannot be edited'
         ], 400);
     }
-    //validation
+
+    // validation
     $request->validate([
         'overtime_title' => 'required',
         'date' => 'required',
         'start_time' => 'required',
         'end_time' => 'required',
+
+        'detail_task' => 'required|array|min:1',
+        'detail_task.*.task_title' => 'required',
+        'detail_task.*.task_description' => 'required',
     ]);
-    //Update Overtime
+    $start = Carbon::parse($request->start_time);
+    $end = Carbon::parse($request->end_time);
+
+    if ($end->lessThanOrEqualTo($start)) {
+        $end->addDay();
+    }
+
+    $duration = $start->diffInHours($end);
+    // update overtime
     $overtime->update([
         'overtime_title' => $request->overtime_title,
         'date' => $request->date,
         'start_time' => $request->start_time,
         'end_time' => $request->end_time,
-        //reset flow
-        // kembali ke pending PM
+        'duration' => $duration,
+
+        // reset approval flow
         'status' => 'pending',
-        // reset HR
         'human_resource_status' => 'pending',
         'human_resource_id' => null,
         'human_resource_reviewed_at' => null,
         'human_resource_notes' => null,
     ]);
-    // task update
-    // OPTIONAL
-    // kalau task bisa diedit juga nanti kita handle di sini
+
+    // delete old tasks
+    $overtime->tasks()->delete();
+
+    // create new tasks
+    foreach ($request->detail_task as $task) {
+        $overtime->tasks()->create([
+            'task_title' => $task['task_title'],
+            'task_description' => $task['task_description'],
+        ]);
+    }
+
     return response()->json([
         'message' => 'Overtime resubmitted successfully',
-        'data' => $overtime
+        'data' => $overtime->load('tasks')
     ]);
 }
 
