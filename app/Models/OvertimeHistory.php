@@ -29,4 +29,9 @@ class OvertimeHistory extends Model
     {
         return $this->belongsTo(User::class, 'actor_id');
     }
+
+    public function tasks ()
+    {
+        return $this->hasMany (OvertimeHistoryTask::class, 'overtime_id', 'id');
+    }
 }
