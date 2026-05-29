@@ -34,4 +34,9 @@ class Overtime extends Model
     {
         return $this->belongsTo(Overtime::class);
     }
+
+    public function histories()
+    {
+        return $this->hasMany(OvertimeHistory::class);
+    }
 }

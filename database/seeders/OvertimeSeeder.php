@@ -16,8 +16,8 @@ class OvertimeSeeder extends Seeder
     public function run(): void
     {
 
-        $productManager = User::where('role', 'product_manager')->first();
-        $user = User::where('email', 'afgan@gmail.com')->first();
+        // $productManager = User::where('role', 'product_manager')->first();
+        // $user = User::where('email', 'afgan@gmail.com')->first();
 
         // $overtime = Overtime::create([
         //     'employee_id' => $user->id,

@@ -7,6 +7,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\OvertimeHistoryController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -37,4 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // ambil form ketika/yang ingin edit
     Route::get('/overtimes/{id}', [FormController::class, 'show']);
     });
+    // histories
+    Route::get('/overtime-histories', [OvertimeHistoryController::class, 'index']);
 });

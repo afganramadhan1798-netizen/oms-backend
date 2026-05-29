@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Overtime;
 use Illuminate\Http\Request;
+use App\Models\OvertimeHistory;
+use App\Models\OvertimeHistoryTask;
 
 class ApprovalController extends Controller
 {
@@ -61,6 +63,15 @@ public function approve($id)
 
     $overtime->save();
 
+    // OvertimeHistory::create([
+    // 'overtime_id' => $overtime->id,
+    // 'actor_id' => auth()->id(),
+    // 'action' => 'declined',
+    // 'notes' => $request->notes,
+    // 'status_before' => 'pending',
+    // 'status_after' => 'declined',
+    // ]);
+
     return response()->json([
         'message' => 'Rejected successfully',
         'data' => $overtime
@@ -105,6 +116,28 @@ public function hrReject(Request $request, $id)
         'human_resource_reviewed_at' => now(),
         'human_resource_notes' => $request->notes,
     ]);
+
+    $overtimeHistory = OvertimeHistory::create([
+        'overtime_id' => $overtime->id,
+        'overtime_title' => $overtime->overtime_title,
+        'date' => $overtime->date,
+        'start_time' => $overtime->start_time,
+        'end_time' => $overtime->end_time,
+        'duration' => $overtime->duration,
+        'actor_id' => auth()->id(),
+        'action' => 'resubmitted',
+        'notes' => $overtime->human_resource_notes,
+        'status_before' => $overtime->human_resource_status,
+        'status_after' => 'pending',
+    ]);
+
+    foreach ($overtime->tasks as $item) {
+        OvertimeHistoryTask::create([
+            'overtime_id' => $overtimeHistory->id,
+            'task_title' => $item->task_title,
+            'task_description' => $item->task_description,
+        ]);
+    }
 
     return response()->json([
         'message' => 'Overtime declined by HR',

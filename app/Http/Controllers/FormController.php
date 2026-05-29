@@ -85,6 +85,20 @@ public function resubmit(Request $request, $id)
     }
 
     $duration = $start->diffInHours($end);
+
+    OvertimeHistory::create([
+    'overtime_id' => $overtime->id,
+    'overtime_title' => $overtime->overtime_title,
+    'date' => $overtime->date,
+    'start_time' => $overtime->start_time,
+    'end_time' => $overtime->end_time,
+    'duration' => $overtime->duration,
+    'actor_id' => auth()->id(),
+    'action' => 'resubmitted',
+    'notes' => $overtime->human_resource_notes,
+    'status_before' => $overtime->human_resource_status,
+    'status_after' => 'pending',
+    ]);
     // update overtime
     $overtime->update([
         'overtime_title' => $request->overtime_title,
@@ -111,6 +125,7 @@ public function resubmit(Request $request, $id)
             'task_description' => $task['task_description'],
         ]);
     }
+
 
     return response()->json([
         'message' => 'Overtime resubmitted successfully',
