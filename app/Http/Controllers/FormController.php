@@ -60,7 +60,7 @@ public function resubmit(Request $request, $id)
     $overtime = Overtime::findOrFail($id);
 
     // hanya overtime declined yang bisa diedit
-    if ($overtime->human_resource_status !== 'declined') {
+    if ($overtime->human_resource_status && $overtime->status !== 'declined') {
         return response()->json([
             'message' => 'This overtime cannot be edited'
         ], 400);
