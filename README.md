@@ -1,59 +1,277 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Overtime Management System (OMS) – Lenna.ai
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Overtime Management System (OMS)** is a web-based application designed to digitalize and centralize the employee overtime management process at Lenna.ai.
 
-## About Laravel
+The system aims to improve overtime visibility, tracking, and monitoring, particularly from the Product Management perspective. It helps managers track overtime activities, monitor working hours, review overtime requests, and access structured historical data for evaluation and decision-making.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1. Project Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Background
 
-## Learning Laravel
+Overtime activities require proper documentation and monitoring to ensure transparency and effective workforce management.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+One of the main challenges at Lenna.ai is the difficulty of tracking overtime activities from the Product Management perspective. Without a centralized system, it becomes challenging to identify employees involved in overtime, monitor total overtime hours, review historical records, and evaluate overtime activities across teams or projects.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+To address these challenges, the Overtime Management System (OMS) is developed as a centralized platform that digitalizes the overtime workflow.
 
-## Laravel Sponsors
+### Objectives
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Centralize all overtime records in one system.
+- Improve overtime tracking and monitoring for Product Management.
+- Provide clear visibility of employee overtime activities.
+- Simplify overtime submission and approval processes.
+- Maintain structured overtime history and approval records.
+- Support management evaluation through accurate overtime data.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 2. Core Problems
 
-## Contributing
+The system addresses several key problems:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Limited Overtime Visibility**  
+   Product Managers have difficulty identifying and monitoring employees who participate in overtime activities.
 
-## Code of Conduct
+2. **Unstructured Overtime Records**  
+   Overtime information is not centralized, making historical tracking difficult.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Difficult Working Hour Monitoring**  
+   There is no convenient way to review total overtime hours per employee or team.
 
-## Security Vulnerabilities
+4. **Limited Approval Transparency**  
+   Tracking approval progress and identifying responsible approvers can be challenging.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Inefficient Evaluation**  
+   Management needs structured historical data to evaluate overtime activities and workforce efficiency.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 3. User Roles & Permissions
+
+OMS implements a role-based access control system (RBAC), where each user has different permissions based on their responsibilities.
+
+| Role | Main Responsibilities |
+|---|---|
+| Employee | View personal overtime records, status, and history. |
+| Product Manager (PM) | Create overtime requests, review submissions, and monitor team overtime activities. |
+| Human Resources (HR) | Review overtime requests and validate them according to company policies. |
+| Finance | Review overtime information and support bonus or compensation calculations. |
+| Management (HOP/HOO) | Provide required approvals and monitor overtime activities across teams. |
+
+---
+
+## 4. Main Features
+
+### 4.1 Authentication & User Management
+- Secure login using email and password.
+- Role-based access control.
+- User profile management.
+- Different dashboard access based on user roles.
+- User account activation and deactivation.
+
+### 4.2 Overtime Request Management
+- Create overtime requests through a structured form.
+- Select team members involved in overtime.
+- Specify overtime date and working hours.
+- Provide overtime descriptions and business justifications.
+- Automatically calculate overtime duration.
+- Validate overtime submission based on business rules.
+
+### 4.3 Overtime Review & Approval
+- Internal review by Product Manager.
+- HR review and validation.
+- Finance review for compensation calculations.
+- Management approval when required.
+- Approve or reject overtime requests.
+- Store approval history, including approver identity, timestamp, and notes.
+
+### 4.4 Overtime Tracking
+This is one of the core features of OMS, particularly for Product Management.
+
+- Monitor employees participating in overtime.
+- Track total overtime hours.
+- View overtime activities by team or project.
+- Identify the responsible Product Manager.
+- Monitor overtime request statuses.
+- View approval history.
+- Access historical overtime records.
+
+### 4.5 Employee Dashboard
+- View personal overtime activities.
+- Monitor overtime approval status.
+- View total overtime hours.
+- Access personal overtime history.
+- View overtime details and relevant approval information.
+
+### 4.6 Reporting & Monitoring
+- View overtime summaries.
+- Monitor total overtime hours by employee.
+- Monitor overtime activities by team.
+- Filter records by date, employee, or project.
+- Support management evaluation and reporting.
+
+---
+
+## 5. Overtime Workflow
+
+The main overtime workflow consists of the following steps:
+
+```text
+USER LOGIN
+    |
+    v
+ROLE IDENTIFICATION
+    |
+    v
+PRODUCT MANAGER
+    |
+    v
+CREATE OVERTIME REQUEST
+    |
+    v
+INTERNAL PM REVIEW
+    |
+    v
+SUBMIT REQUEST
+    |
+    v
+HR & FINANCE REVIEW
+    |
+    v
+MANAGEMENT APPROVAL
+(When Required)
+    |
+    v
+OVERTIME STATUS UPDATED
+    |
+    v
+OVERTIME EXECUTION
+    |
+    v
+DATA RECORDING & TRACKING
+    |
+    v
+REPORTING & EVALUATION
+```
+
+Employees can access their relevant overtime information through their personal dashboard, while Product Management and authorized management users can monitor overtime activities according to their access permissions.
+
+---
+
+## 6. Business Rules
+
+The system follows these initial business rules:
+
+- Overtime must start at 19:00 or later on weekdays.
+- Minimum overtime duration is 4 hours.
+- Every overtime request must include a clear work description and justification.
+- Every request must go through the required review and approval process.
+- Approval activities must be recorded in the system.
+- Employees can only access overtime records relevant to their accounts.
+- Users can only access features permitted by their assigned roles.
+
+*Note: Final overtime policies, including weekend scheduling and approval requirements, should follow the official company regulations.*
+
+---
+
+## 7. Technology Stack
+
+The following technologies are intended for the application development:
+
+| Category | Technology |
+|---|---|
+| Frontend | Vue.js |
+| Styling | CSS / Tailwind CSS |
+| Backend | Laravel |
+| Database | MySQL |
+| API | REST API |
+| Authentication | Laravel Sanctum |
+| Development Environment | Laragon |
+| API Testing | Postman |
+| Version Control | Git & GitHub |
+
+---
+
+## 8. Project Scope
+
+The project focuses on four main development areas:
+
+1. **Overtime Form Development**  
+   Designing the overtime submission form based on HR and Product Management requirements.
+
+2. **System Requirements**  
+   Defining system functionality, business rules, and technical requirements.
+
+3. **Product Requirement Document (PRD)**  
+   Documenting user needs, system objectives, workflows, and feature specifications.
+
+4. **User Management**  
+   Implementing user roles, permissions, authentication, and access control.
+
+---
+
+## 9. Project Timeline
+
+| Information | Details |
+|---|---|
+| Project Duration | 5 Weeks |
+| Development Team | 2 People |
+| Target Deadline | 31 May |
+| Consultation | Lenna.ai Team |
+
+### Development Phases
+
+- Week 1: Research, requirement gathering, and PRD.
+- Week 2: UI/UX design and system planning.
+- Week 3–4: Frontend and backend development.
+- Week 5: Integration, testing, and improvements.
+
+---
+
+## 10. Expected Outcomes
+
+Through the implementation of OMS, Lenna.ai is expected to achieve:
+
+- More structured overtime documentation.
+- Better overtime visibility for Product Management.
+- Easier monitoring of employee overtime activities.
+- Transparent approval workflows.
+- More accessible historical overtime data.
+- Better workforce evaluation and management decisions.
+
+---
+
+## 11. Future Development
+
+Potential improvements for future iterations include:
+
+- Automated email and in-app notifications.
+- Overtime attendance verification.
+- Export reports to Excel and PDF.
+- Advanced analytics and overtime trends.
+- Calendar integration.
+- Automated compensation summaries.
+
+---
+
+## 12. Project Team
+
+**Development Team:** 2 Members  
+**Project Consultation:** Lenna.ai Team
+
+---
+
+## 13. Conclusion
+
+Overtime Management System (OMS) is designed to transform the overtime management process at Lenna.ai into a more structured, transparent, and trackable digital workflow.
+
+By centralizing overtime requests, approval records, employee activities, and historical data, OMS aims to help Product Management monitor team overtime more effectively while providing employees with better visibility into their personal overtime records.
+
+**The main focus is not only managing overtime requests, but also ensuring that every overtime activity can be properly tracked, monitored, and evaluated.**
+
+---
+
+*Overtime Management System (OMS) – Lenna.ai*  
+*Project Documentation*
